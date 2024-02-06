@@ -16,11 +16,14 @@
     <div id="map"></div>
     <script>
       const key = 'YRkMPQI4QoqM6KEpwd9H';
-      const map = L.map('map').setView([19.32092, -81.29892], 10);
+      const map = L.map('map').setView([19.32092, -81.29892], 20);
       const mtLayer = L.maptilerLayer({
         apiKey: key,
         style: "backdrop", //optional
       }).addTo(map);
+
+      L.marker([19.38335,-81.41582]).addTo(map)
+      .bindPopup('Sunset Point');
     </script>
   </body>
 </html>
