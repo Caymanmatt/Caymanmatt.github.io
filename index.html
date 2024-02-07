@@ -40,6 +40,10 @@
   border: none;
   box-shadow: none;
 }
+
+q {
+  font-style: italic;
+}
      </style>
   </head>
   <body>
@@ -52,7 +56,7 @@
         style: "backdrop", //optional
       }).addTo(map);
 //Intro Pop Up
-var pContent = "<p>The information contained in this map demonstrates the importance of coastal setbacks.</p><br /><img src=logo-1.jpg />"
+var pContent = "<p>On February 6th 2024, the Cayman Islands experienced a Nor'wester with near high seas and near gale force winds. Many coastal properties suffered damage as a result. The information contained in this map demonstrates the importance of coastal setbacks.</p><br /><img src=logo-1.png />"
 
       var popup = L.popup({
   closeButton: true,
@@ -67,7 +71,16 @@ var pContent = "<p>The information contained in this map demonstrates the import
 
 
 var picURL='sunset.jpg'
-      var popupContent = "<b>Sunset Point</b><br /><p>In March 2021, the DoE was consulted about the construction of the Sunset Point apartment complex, gym, cabana, pool, walls and signs.</p><p>The DoE review stated:</p><q>The DOE does not support the granting of a variance in the coastal setback, based on the current design of the proposed development in this location.</q><br /><img src='"+picURL+"' width=200 />";
+var picURL2='sunset-point1.gif'
+var interval = setInterval(function(){
+          var countForVideo = document.getElementById('vid').readyState;
+          if(countForVideo == 4){
+            document.getElementById('vid').play();
+            clearInterval(interval);
+          }
+        },2000);
+
+      var popupContent = "<b>Sunset Point</b><br /><p>In March 2021, the DoE was consulted about the construction of the Sunset Point apartment complex, located at North West Point. The property did not comply with the minimum required setback as per the Development and Planning Regulations.</p><p>The DoE review stated:</p><q>The DOE does not support the granting of a variance in the coastal setback, based on the current design of the proposed development in this location.</q><br /><img src='"+picURL+"' width=200 /><p>The plans for the property included a seawall CPA at the time had this to say:</p><q>the Authority is of the view that the wall will provide sufficient protection for the buildings and ancillary features and the lesser setback will not detract from that protection.</q><br /><img src='"+picURL2+"' width=200 /><br /><video controls autoplay muted><source src='sunset1.mp4' type='video/mp4'></source></video>";
     
 // specify popup options 
 
@@ -79,6 +92,6 @@ var popupOptions =
     }
 L.marker([19.38335, -81.41582]).addTo(map)
 		.bindPopup(popupContent, popupOptions);
-    </script>
+        </script>
   </body>
 </html>
