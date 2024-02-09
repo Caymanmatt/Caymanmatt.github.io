@@ -8,6 +8,15 @@
     <script src="https://cdn.maptiler.com/maptiler-sdk-js/v1.2.0/maptiler-sdk.umd.js"></script>
     <link href="https://cdn.maptiler.com/maptiler-sdk-js/v1.2.0/maptiler-sdk.css" rel="stylesheet" />
     <script src="https://cdn.maptiler.com/leaflet-maptilersdk/v2.0.0/leaflet-maptilersdk.js"></script>
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
     <!-- LEAFLET STYLES-->
     <style>
       
@@ -54,6 +63,7 @@
 
 
 
+
 q {
   font-style: italic;
   /*font-size: 12px*/
@@ -64,13 +74,19 @@ q {
     <div id="map"></div>
     <script>
       const key = 'YRkMPQI4QoqM6KEpwd9H';
-      const map = L.map('map').setView([19.32092, -81.25], 12);
+      const map = L.map('map').setView([19.322801, -81.368940], 14);
+      
+      map.fitBounds([
+    [19.401353, -81.438640],
+    [19.260590, -81.333068]
+ ]);
+      //map.fitBounds([[19.401353, -81.438640],[19.260590, -81.333068]]);
       const mtLayer = L.maptilerLayer({
         apiKey: key,
         style: "backdrop", //optional
       }).addTo(map);
 //Intro Pop Up
-var pContent = "<p>On February 6th 2024, the Cayman Islands experienced a Nor'wester with high seas and near gale force winds. Unfortunately many coastal properties suffered damage as a result, with environmental, financial and personal consequences. The information contained in this map demonstrates the importance of coastal setbacks.</p><br /><img src=logo-1.png />"
+var pContent = "<p>On February 6th 2024, the Cayman Islands experienced a Nor'wester with high seas and near gale force winds. Unfortunately many coastal properties suffered damage as a result, with environmental, financial and personal consequences. The information contained in this map demonstrates the importance of coastal setbacks.</p><br /><img src=logo-white.png width=400 />"
 
       var popup = L.popup({
   closeButton: true,
@@ -80,6 +96,17 @@ var pContent = "<p>On February 6th 2024, the Cayman Islands experienced a Nor'we
 .setLatLng(map.getBounds().getCenter())
 .setContent(pContent)
 .openOn(map);
+
+var Logo_Add = L.control({position: "topright"});
+Logo_Add.onAdd = function(map) {
+    var div = L.DomUtil.create("div", "info legend");
+    div.innerHTML = '<img src="logo-white.png" width=300>';
+    return div;
+}
+Logo_Add.addTo(map); 
+
+
+
 
 
 
@@ -99,52 +126,81 @@ var interval = setInterval(function(){
         },2000);
 
         
-
       //Sunset Point
       var popupContent_Table1="<h2>Granted coastal setback variance in 2021</h2><p>In March 2021, the DoE was consulted on the planning application for an apartment complex located on North West Point Rd. The property did not comply with the minimum required setback as per the Development and Planning Regulations</p><table><tr><th>The DOE said:</th><th>The CPA at the time said:</th></tr><tr><td><q>The DOE does not support the granting of a variance in the coastal setback, based on the current design of the proposed development in this location...<br /><br />... The Department of Environment would therefore recommend this application to be refused and the setbacks increased, and/or design techniques be incorporated to make the development more resilient</q><br /></td><td><q>the Authority is of the view that the wall will provide sufficient protection for the buildings and acillary features and the lesser setback will not detract from that protections.</q><br /><br /><q>The Authority considered the comments from DOE/NCC and disagrees with the recommendation to refuse the application for the reasons provided above.</q></td></tr></table><br /><img src='"+picURL2+"' height=400 /><img src='"+picURL3+"' height=400 />"
     //Fin
-      var popupContent_Table2="<h2>Fin</h2><p>Granted coastal setback variance in 2015.</p><p>In March 2021, the DoE was consulted on the planning application for the Fin building, located on South Church Street. The property did not comply with the minimum required setback as per the Development and Planning Regulations</p><table><tr><th>The DOE said:</th><th>The CPA at the time said:</th></tr><tr><td>The DoE had concerns regarding the building set-back of 50ft from the coast and the risk this would pose to the development and the surrounding area. The large natural setback of the vegetation line on the property is evidence that the site is vulnerable to wave action. <br /><br /><q>The threat of inundation will be compounded by climate change; as is outlined in the Draft National Climate Change Policy, building setbacks should be increased to mitigate this.</q><br /></td><td><q>What did they say?</q><br /><br /><q>Anything Else?</q></td></tr></table><br /><img src='"+picURL2+"' height=400 /><img src='"+picURL3+"' height=400 />"
+      var popupContent_Table2="<h2>Granted coastal setback variance in 2015.</h2><p>In March 2021, the DoE was consulted on the planning application for a residential building located on South Church Street. The property mostly met the minimum setbacks under the Development and Planning Regulations, although portions of the building did not.</p><table><tr><th>The DOE said:</th><th>The CPA at the time said:</th></tr><tr><td>The DoE had concerns regarding the building set-back of 50ft from the coast and the risk this would pose to the development and the surrounding area. The large natural setback of the vegetation line on the property is evidence that the site is vulnerable to wave action. <br /><br /><q>The threat of inundation will be compounded by climate change; as is outlined in the Draft National Climate Change Policy, building setbacks should be increased to mitigate this.</q><br /></td><td>The majority of the building meets the minimum setbacks under the development and planning regulations.<br /><br />Did not support increased setbacks.</td></tr></table><br /><img src='"+picURL4+"' height=400 />"
 
-      
+      //Royal Palms
+      var popupContent_Table3="<h2>Application for extension and new structures directly on the beach.</h2><p>In May 2021, the DoE was consulted on the planning application for renovations and an extension to a beach side development located on Seven Mile Beach. </p><table><tr><th>The DOE said:</th><th>The CPA at the time said:</th></tr><tr><td>The seawall and deck are an example of development which is located too close to the sea.<br /><br /><q>It would be ill-advised to contemplate the refurbishment and enhancement of existing infrastructure which was historically built in an inappropriate location on the active beach and has incurred significant structural damage. Furthermore, to then consider supplementing this infrastructure with additional structures/infrastructure on the active beach is of great concern.</q><br /><br /><q>We therefore recommend refusal of this application and the submission of revised plans to ensure the development meets the minimum coastal setbacks prescribed in the Development and Planning Regulations</q><br /></td><td>What did they say?<br /><br />The applicant withdrew the planning application.</td></tr></table><br />"
 
-var popupContent2 ="<b>Fin</b><br /><p>Granted coastal variance in 2015.</p><img src='"+picURL5+"' width=200 /><p>In July 2015, the DoE was consulted about the construction of the Fin building, located at North West Point. The DoE had concerns regarding the building set-back of 50ft from the coast and the risk this would pose to the development and the surrounding area. The large natural setback of the vegetation line on the property is evidence that the site is vulnerable to wave action. The DoE's review also noted that the threat of inundation will be compounded by climate change, and that building setbacks should be increased to mitigate this.</p><p>A small portion of the building did not comply with the required minimum setback under the Development and Planning Regulations, and the applicant requested a variance for this. In their analysis of the application, the Planning Department noted that they supported the granting of a variance for this setback.</p><img src='"+picURL4+"' width=200 />"
+      //Macabuca
+      var popupContent_Table4="<h2>Application for the expansion of a deck over ironshore</h2><p>In July 2019, the DoE was consulted on the planning application for the expansion of a deck for a commercial property located at Northwest Point</p><table><tr><th>The DOE said:</th><th>The CPA at the time said:</th></tr><tr><td><q>Given the extensively documented climate change predictions for the region, which include increased intensity of storm events, the DOE recommends against the granting of a coastal setback variance to allow for the construction of the deck in this location. Predominantly due to the potential wave impact on the structure and the siting of it over an undercut/overhanging section of ironshore.</q></td><td><q>Through reviewing aerial photographs the existing outdoor bar, elevated deck and cabana are located within the HWM setback. The Authority is recommended to the merits of the applicant's request to further encroach into the HWM setback.><br /><br /><q>The applicant shall submit a revised site plan showing the deck with a minimum setback of 5' from the edge of the ironshore.</q></td></tr></table><br />"
+
+      //Dream big Holdings
+      var popupContent_Table5="<h2>Application for retaining wall and pool within minimum coastal setbacks</h2><p>In July 2019, the DoE was consulted on the planning application for a modification to a property located at Northwest Point</p><table><tr><th>The DOE said:</th><th>The CPA at the time said:</th></tr><tr><td><q>The application is located on a high energy coastline, which has very deep water close to shore with no fringing reef. As a result, the site offers little natural protection from wave action during inclement weather (both during storms and hurricanes).</q></td><td><q>What did they say here?<br /><br /><q>Another Point</q></td></tr></table><br />"
+
+      //Micris
+      var popupContent_Table6="<h2>Application for apartment building, with proposed amphitheatre and cabana within the minimum coastal setbacks</h2><p>In June 2021, the DoE was consulted on the planning application for an apartment building located at North West Point</p><table><tr><th>The DOE said:</th><th>The CPA at the time said:</th></tr><tr><td><q>The site is located on the ironshore coastline of Northwest Point in an area with deep water offshore which is occasionally subject to significant wave impacts during storm events. Under normal conditions the ironshore experiences wave overtopping on a regular basis.</q><br /><br /><q>The proximity of the amphitheatre and cabana to the Marine Reserve would likely result in direct adverse impacts during construction, with wave overtopping washing construction materials into the sea</q></td><td><q>What did they say here?<br /><br /><q>Another Point</q></td></tr></table><br />"
+
+      //Sundance
+      var popupContent_Table7="<h2>Application for 4 storey apartment building</h2><p>In February 2023, the DoE was consulted on the planning application for an apartment building located at North West Point</p><table><tr><th>The DOE said:</th><th>The CPA at the time said:</th></tr><tr><td><q>The application site has very deep water close to shore with no fringing reef. Given this is an ironshore coastline, the presence of sand indicates that this is also a high energy coastline as the sand present would have been thrown up onto the site during storm events.</q><br /><br /><q>We recommend the applicant consideres exceeding the minimum coastal setback of 50 feet by repositioning the development and all ancillary structures (including the pool) further away from the sea and/or incorporating climate-resilient features such as raised/wash-through foundations to increase the development's climate resiliency.</q></td><td><q>What did they say here?<br /><br /><q>Another Point</q></td></tr></table><br />"
+
+      //NWPR
+      var popupContent_Table8="<h2>Application for 3 storey apartment building</h2><p>In June 2017, the DoE was consulted on the planning application for an apartment building located at North West Point</p><table><tr><th>The DOE said:</th><th>The CPA at the time said:</th></tr><tr><td><q>Having reviewed the above mentioned application, the Department notes that the setback is met from the GB standard mean high watermark (MHWM) but is not met from the sea pool which would now be the new high water mark.</q><br /><br /><q>What else can we say about this one?</q></td><td><q>What did they say here?<br /><br /><q>Another Point</q></td></tr></table><br />"
+
+      //Dolphin Point
+      var popupContent_Table9="<h2>Application for 3 storey apartment building</h2><p>In May 2019, the DoE was consulted on the planning application for an apartment building located at North West Point</p><table><tr><th>The DOE said:</th><th>The CPA at the time said:</th></tr><tr><td><q>Nor'westers or even regular bad weather will sweep the sand off the new beach area directly into a Marine Protected Area. The apartments which previously occupied the site were destroyed by Hurricane Ivan.</q><br /><br /><q>What else can we say about this one?</q></td><td><q>What did they say here?<br /><br /><q>Another Point</q></td></tr></table><br />"
+
 
 var popupOptions =
     {
       'maxWidth': '500',
       'className' : 'another-popup'
     }
+
+
+//--------------------------------------------
+//LEAFLET MAP MARKERS
+//--------------------------------------------
+
+ //Sunset Point   
 L.marker([19.38335, -81.41582]).addTo(map)
 		.bindPopup(popupContent_Table1, popupOptions);
 
-    
+ //Fin   
 L.marker([19.28823, -81.38941]).addTo(map)
 .bindPopup(popupContent_Table2, popupOptions);
 
+//Royal Palms
 L.marker([19.321790,-81.384031]).addTo(map)
-.bindPopup("Royal Palms", popupOptions);
+.bindPopup(popupContent_Table3, popupOptions);
 
+//Macabuca
 L.marker([19.382626,-81.416557]).addTo(map)
-.bindPopup("Macabuca", popupOptions);
+.bindPopup(popupContent_Table4, popupOptions);
 
+//Dream Big Holdings
 L.marker([19.374356,-81.419745]).addTo(map)
-.bindPopup("Dream Big Holdings", popupOptions);
+.bindPopup(popupContent_Table5, popupOptions);
 
+//Micris
 L.marker([19.37087,-81.41551]).addTo(map)
-.bindPopup("Micris", popupOptions);
+.bindPopup(popupContent_Table6, popupOptions);
 
+//Sundance
 L.marker([19.37081,-81.41495]).addTo(map)
-.bindPopup("Sundance", popupOptions);
+.bindPopup(popupContent_Table7, popupOptions);
 
+//NWPR
 L.marker([19.37625,-81.41887]).addTo(map)
-.bindPopup("NWPR", popupOptions);
+.bindPopup(popupContent_Table8, popupOptions);
 
+//Dolphin Point
 L.marker([19.37131,-81.41679]).addTo(map)
-.bindPopup("Dolphin Point", popupOptions);
+.bindPopup(popupContent_Table9, popupOptions);
 
-
-
-
+//-----------------------------------------
 
         </script>
 
