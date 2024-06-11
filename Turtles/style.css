@@ -1,5 +1,5 @@
 #heading1 {
-    font-family: Arial;
+    font-family: Tahoma;
     font-size: 75;
     font-weight: bold;
     text-align: center;
@@ -7,7 +7,7 @@
 }
 
 #heading2 {
-    font-family: Arial;
+    font-family: Tahoma;
     font-size: 45;
     font-weight: bold;
     text-align: center;
@@ -16,8 +16,8 @@
 
 #paragraph1 {
     color: black;
-    font-family:Arial;
-    font-size: calc(14px + 0.390625vw);
+    font-family:Tahoma;
+    font-size: 24;
     text-align: justify;
     margin-right: 150px;
     margin-left: 150px;
@@ -25,29 +25,29 @@
 
   #paragraph2 {
     color: black;
-    font-family:Arial;
-    font-size: calc(14px + 0.390625vw);
+    font-family:Tahoma;
+    font-size: 24;
     text-align: justify;
-    margin-right: 250px;
-    margin-left: 250px;
+    margin-right: 380px;
+    margin-left: 380px;
   }
 
   #paragraph3 {
     color: black;
-    font-family:Arial;
-    font-size: calc(14px + 0.390625vw);
+    font-family:Tahoma;
+    font-size: 24;
     text-align: justify;
-    margin-right: 250px;
-    margin-left: 250px;
+    margin-right: 380px;
+    margin-left: 380px;
   }
 
   #paragraph4 {
     color: black;
-    font-family:Arial;
-    font-size: calc(14px + 0.390625vw);
+    font-family:Tahoma;
+    font-size: 24;
     text-align: justify;
-    margin-right: 250px;
-    margin-left: 250px;
+    margin-right: 380px;
+    margin-left: 380px;
     margin-bottom: 1em;
   }
 
@@ -57,7 +57,7 @@
   }*/ 
 
   #heading3 {
-    font-family: Arial;
+    font-family: Tahoma;
     font-size: 45;
     font-weight: bold;
     text-align: center;
@@ -66,8 +66,8 @@
 
   #paragraph5 {
     color: black;
-    font-family:Arial;
-    font-size: calc(14px + 0.390625vw);
+    font-family:Tahoma;
+    font-size: 24;
     text-align: justify;
     margin-right: 150px;
     margin-left: 150px;
@@ -78,35 +78,59 @@
     margin-bottom: 1.50em;
   }
 
-  #note1 {
-    color: black;
-    font-family:Arial;
-    font-size: calc(10px + 0.390625vw);
-    text-align: justify;
-    margin-right: 150px;
-    margin-left: 10px;
-    margin-bottom: 1em;
+/*
+  .image1
+  {
+  width:33%;
+  height:auto;
   }
 
-.row {
-  display: flex;
-  flex-wrap: nowrap;
+  .image2
+  {
+  width:33%;
+  height:auto;
+  }
+
+  .image3
+  {
+  width:33%;
+  height:auto;
+  }
+
+  .image4
+  {
+  width:33%;
+  height:auto;
+  }
+
+  .image5
+  {
+  width:33%;
+  height:auto;
+  }
+
+  .image6
+  {
+  width:33%;
+  height:auto;
+  }
+*/
+
+#gallery {
+  text-align: center;  
 }
 
-.column {
-  flex: 33%;
-  max-width: 33%;
-}
-
-.column img{
-  vertical-align: middle;
-  width: 100%
+.item {
+  width:33%;
+  height:auto;
+  margin-left: auto;
+  margin-right: auto;  
 }
 
   #paragraph6 {
     color: black;
-    font-family:Arial;
-    font-size: calc(14px + 0.50vw);
+    font-family:Tahoma;
+    font-size: 24;
     font-weight: bold;
     text-align: center;
     margin-right: 175px;
@@ -114,5 +138,12 @@
     margin-bottom: 1em;
   } 
 
-
+.image7
+  {
+  display: block;
+  width:70%;
+  height:auto;
+  margin-left: auto;
+  margin-right: auto;
+  }
 
