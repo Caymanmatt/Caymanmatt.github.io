@@ -5,36 +5,36 @@ anychart.onDocumentReady(function(){
     
     //creating the data
     var data = [
-    {from: "Proposed TFL Properties", to: "EPF Retrofit Properties", weight: 50},
-    {from: "EPF Retrofit Properties", to: "Low Risk to Sea Turtles", weight: 4},
-    {from: "Low Risk to Sea Turtles", to: "Turtle Friendly", weight: 4},
-    {from: "EPF Retrofit Properties", to: "Not Installed", weight: 25},
-    {from: "EPF Retrofit Properties", to: "Installed", weight: 21},
-    {from: "Installed", to: "Turtle Friendly", weight: 10},
-    {from: "Installed", to: "In TFL Process", weight: 2},
+    {from: "Proposed TFL Properties", to: "Potential Retrofit Properties", weight: 50},
+    {from: "Potential Retrofit Properties", to: "TFL Not Required At This Time", weight: 4},
+    {from: "TFL Not Required At This Time", to: "Currently Turtle Friendly", weight: 4},
+    {from: "Potential Retrofit Properties", to: "Didn't Participate in Retrofit Programme", weight: 19},
+    {from: "Potential Retrofit Properties", to: "Participated in Retrofit Programme", weight: 27},
+    {from: "Participated in Retrofit Programme", to: "Completed TFL Installation", weight: 19},
+    {from: "Participated in Retrofit Programme", to: "Still In TFL Process", weight: 8},
     //{from: "Lights on Order", to: "TFL In Progress", weight: 2},
     //{from: "Installed", to: "Currently Not Turtle Friendly", weight: 9},
-    {from: "Not Installed", to: "Not Turtle Friendly", weight: 18},
-    {from: "Not Installed", to: "In TFL Process", weight: 6},
-    {from: "In TFL Process", to: "TFL In Progress", weight: 8},
-    {from: "Not Installed", to: "Under Construction", weight: 1},
+    {from: "Didn't Participate in Retrofit Programme", to: "Currently Not Turtle Friendly", weight: 18},
+    {from: "Still In TFL Process", to: "TFL In Progress", weight: 8},
+    {from: "Didn't Participate in Retrofit Programme", to: "Under Construction/Re-developing", weight: 1},
     //{from: "Under Construction", to: "TFL In Progress", weight: 1},
     
-    {from: "Proposed TFL Properties", to: "TFL Planning Conditions", weight: 58},
-    {from: "TFL Planning Conditions", to: "Under Construction", weight: 44},
+    {from: "Proposed TFL Properties", to: "New Builds with TFL Planning Conditions", weight: 58},
+    {from: "New Builds with TFL Planning Conditions", to: "Under Construction/Re-developing", weight: 44},
     //{from: "Under Construction", to: "TFL In Progress", weight: 44},
-    {from: "TFL Planning Conditions", to: "Occupied Properties", weight: 14},
-    {from: "Occupied Properties", to: "Turtle Friendly", weight: 5},
-    {from: "Occupied Properties", to: "Not Turtle Friendly", weight: 9},
+    {from: "New Builds with TFL Planning Conditions", to: "Completed Developments", weight: 14},
+    {from: "Completed Developments", to: "Currently Turtle Friendly", weight: 5},
+    {from: "Completed Developments", to: "Currently Not Turtle Friendly", weight: 9},
 
 
     {from: "Proposed TFL Properties", to: "Voluntary Properties", weight: 6},
-    {from: "Voluntary Properties", to: "Installed", weight: 2},
-    {from: "Installed", to: "Not Turtle Friendly", weight: 11},
-    {from: "Voluntary Properties", to: "Under Construction", weight: 1},
-    {from: "Under Construction", to: "TFL In Progress", weight: 46},
-    {from: "Voluntary Properties", to: "Turtle Friendly", weight: 0},
-    {from: "Voluntary Properties", to: "Not Turtle Friendly", weight: 3}
+    {from: "Voluntary Properties", to: "Completed TFL Installation", weight: 2},
+    {from: "Completed TFL Installation", to: "Currently Not Turtle Friendly", weight: 11},
+    {from: "Completed TFL Installation", to: "Currently Turtle Friendly", weight: 10},
+    {from: "Voluntary Properties", to: "Under Construction/Re-developing", weight: 1},
+    {from: "Under Construction/Re-developing", to: "TFL In Progress", weight: 46},
+    {from: "Voluntary Properties", to: "Currently Turtle Friendly", weight: 0},
+    {from: "Voluntary Properties", to: "Currently Not Turtle Friendly", weight: 3}
    
     ];
    
@@ -54,8 +54,9 @@ anychart.onDocumentReady(function(){
       '#008080',//1
       '#8FBC8B',//3
       '#5F9EA0',//2
-      '#FFB6C1',
-      '#F08080',
+      '#FA8072',//3
+      '#F08080',//2
+      '#CD5C5C',//1
       '#F4A460',//3
       '#FFA07A',//2
       '#E9967A'//1
@@ -76,7 +77,7 @@ anychart.onDocumentReady(function(){
    node.labels().fontSize(14)
    node.wordWrap('break-word')--*/
 
-   sankey_chart.node().normal().labels().fontSize(18);
+   sankey_chart.node().normal().labels().fontSize(12);
    sankey_chart.node().normal().labels().fontFamily('Tahoma');
    sankey_chart.node().normal().labels().position("center-middle")
    sankey_chart.node().labels().useHtml(true);
@@ -98,12 +99,12 @@ anychart.onDocumentReady(function(){
    sankey_chart.flow({
     normal: {
       fill: function () {
-        return anychart.color.lighten(this.sourceColor, 0.6) + " " + 0.4;
+        return anychart.color.lighten(this.sourceColor, 0.2) + " " + 0.5;
       }
     },
     hovered: {
       fill: function () {
-        return this.sourceColor + " " + 0.8;
+        return this.sourceColor + " " + 0.9;
       }
     }
   });
@@ -112,15 +113,15 @@ anychart.onDocumentReady(function(){
   //sankey_chart.node().tooltip().anchor('center-bottom')
   sankey_chart.node().tooltip().background().fill("#000000")
   sankey_chart.node().tooltip().fontFamily('Tahoma')
-  sankey_chart.node().tooltip().fontSize(16)
-  sankey_chart.node().tooltip().title().fontSize(18)
+  sankey_chart.node().tooltip().fontSize(12)
+  sankey_chart.node().tooltip().title().fontSize(12)
   sankey_chart.node().tooltip().title().fontDecoration("bold")
 
  //sankey_chart.flow().tooltip().anchor('center-bottom')
   sankey_chart.flow().tooltip().background().fill("#000000")
   sankey_chart.flow().tooltip().fontFamily('Tahoma')
-  sankey_chart.flow().tooltip().fontSize(16)
-  sankey_chart.flow().tooltip().title().fontSize(18)
+  sankey_chart.flow().tooltip().fontSize(12)
+  sankey_chart.flow().tooltip().title().fontSize(12)
   sankey_chart.flow().tooltip().title().fontDecoration("bold")
 
   //setting the chart title
