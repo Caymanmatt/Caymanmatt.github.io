@@ -12,13 +12,14 @@
     <main>
         <h1>Hover Test</h1>
       
-
-
 <img src="BlueBelt-Expediton-2026-9.png" style="width:75%; height:auto;" usemap="#image-map" id="myImage">
 
 <map name="image-map">
-    <area target="" href="" coords="91,517,384,215" shape="rect" data-text="As the Blue Belt Programme Officer and Cayman team lead for the Research Expedition, I’ll be onboard the R.R.S James Cook for the full 6-week expedition. In addition to being involved in all areas of research, an important part of my role is to collaborate and foster connections between the Cayman Islands, our UKOT neighbours (Anguilla and the Turks and Caicos Islands) and the UK Government.
-    <br><br>I’m really excited to learn more about what makes the offshore banks a preferred habitat for important fish species and to discover more about the species of deep sea snapper we have and their life history.">
+
+    <!-- Reformatted with \n line breaks -->
+    <area target="" href="" coords="91,517,384,215" shape="rect"
+      data-text="As the Blue Belt Programme Officer and Cayman team lead for the Research Expedition, I’ll be onboard the R.R.S James Cook for the full 6-week expedition.\n\nIn addition to being involved in all areas of research, an important part of my role is to collaborate and foster connections between the Cayman Islands, our UKOT neighbours (Anguilla and the Turks and Caicos Islands) and the UK Government.\n\nI’m really excited to learn more about what makes the offshore banks a preferred habitat for important fish species and to discover more about the species of deep sea snapper we have and their life history.">
+
     <area target="" href="" coords="564,217,862,521" shape="rect" data-text="Paul">
     <area target="" href="" coords="1049,214,1331,517" shape="rect" data-text="Claire">
     <area target="" href="" coords="1526,215,1790,515" shape="rect" data-text="Sabrina">
@@ -26,6 +27,7 @@
     <area target="" href="" coords="566,666,847,968" shape="rect" data-text="Megan">
     <area target="" href="" coords="1056,668,1331,965" shape="rect" data-text="Jane">
     <area target="" href="" coords="1526,666,1819,966" shape="rect" data-text="Matt">
+
 </map>
 
 <!-- Popup box -->
@@ -36,20 +38,22 @@
   padding:6px 10px;
   border-radius:6px;
   max-width:20%;
-  white-space:wrap;
+  white-space:normal;    /* enable wrapping */
   pointer-events:none;
   display:none;
-  font-family: sans-serif;
+  font-family:sans-serif;
   z-index:10;">
 </div>  
+
     </main>
-    <script>
+
+<script>
 function scaleImageMap() {
   const img = document.getElementById("myImage");
   const mapName = img.getAttribute("usemap").replace("#", "");
   const map = document.querySelector(`map[name="${mapName}"]`);
   
-  if (!img.naturalWidth) return; // image not loaded yet
+  if (!img.naturalWidth) return;
 
   const scale = img.clientWidth / img.naturalWidth;
 
@@ -60,7 +64,7 @@ function scaleImageMap() {
   });
 }
 
-// Save original coords on page load
+// Save original coords
 window.addEventListener("load", () => {
   document.querySelectorAll("area").forEach(area => {
     area.dataset.originalCoords = area.coords;
@@ -68,17 +72,18 @@ window.addEventListener("load", () => {
   scaleImageMap();
 });
 
-// Recalculate when window is resized
+// Rescale on window resize
 window.addEventListener("resize", scaleImageMap);
 
 
-
-     const popup = document.getElementById("popup");
+// Popup logic with \n → <br> conversion
+const popup = document.getElementById("popup");
 const areas = document.querySelectorAll("area");
 
 areas.forEach(area => {
-  area.addEventListener("mouseover", (e) => {
-    popup.innerText = area.dataset.text;
+
+  area.addEventListener("mouseover", () => {
+    popup.innerHTML = area.dataset.text.replace(/\n/g, "<br>");
     popup.style.display = "block";
   });
 
@@ -90,9 +95,9 @@ areas.forEach(area => {
   area.addEventListener("mouseout", () => {
     popup.style.display = "none";
   });
-});   
-    </script>
+
+});
+</script>
+
   </body>
-
 </html>
-
