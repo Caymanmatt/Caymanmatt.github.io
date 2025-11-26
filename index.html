@@ -41,6 +41,34 @@
 </div>  
     </main>
     <script>
+
+      function scaleImageMap() {
+  const img = document.getElementById("myImage");
+  const mapName = img.getAttribute("usemap").replace("#", "");
+  const map = document.querySelector(`map[name="${mapName}"]`);
+  
+  if (!img.naturalWidth) return; // image not loaded yet
+
+  const scale = img.clientWidth / img.naturalWidth;
+
+  map.querySelectorAll("area").forEach(area => {
+    const originalCoords = area.dataset.originalCoords.split(",").map(Number);
+    const scaledCoords = originalCoords.map(n => Math.round(n * scale));
+    area.coords = scaledCoords.join(",");
+  });
+}
+
+// Save original coords on page load
+window.addEventListener("load", () => {
+  document.querySelectorAll("area").forEach(area => {
+    area.dataset.originalCoords = area.coords;
+  });
+  scaleImageMap();
+});
+
+// Recalculate when window is resized
+window.addEventListener("resize", scaleImageMap);
+      
      const popup = document.getElementById("popup");
 const areas = document.querySelectorAll("area");
 
@@ -63,3 +91,4 @@ areas.forEach(area => {
   </body>
 
 </html>
+
