@@ -82,10 +82,10 @@ const areas = document.querySelectorAll("area");
 
 areas.forEach(area => {
 
-  area.addEventListener("mouseover", () => {
-    popup.innerHTML = area.dataset.text.replace(/\n/g, "<br>");
-    popup.style.display = "block";
-  });
+area.addEventListener("mouseover", () => {
+   popup.innerHTML = area.dataset.text.replace(/\\n/g, "<br>");
+  popup.style.display = "block";
+});
 
   area.addEventListener("mousemove", (e) => {
     popup.style.left = e.pageX + 10 + "px";
@@ -101,3 +101,4 @@ areas.forEach(area => {
 
   </body>
 </html>
+
