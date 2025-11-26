@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Website</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="./favicon.ico" type="image/x-icon">
+  </head>
+  <body>
+    <main>
+        <h1>Hover Test</h1>
+      
+
+
+<img src="BlueBelt-Expediton-2026-9.png" usemap="#image-map" id="myImage">
+
+<map name="image-map">
+    <area target="" alt="Kelly" title="Kelly" href="" coords="91,517,384,215" shape="rect" data-text="Kelly">
+    <area target="" alt="Paul" title="Paul" href="" coords="564,217,862,521" shape="rect" data-text="Paul">
+    <area target="" alt="Claire" title="Claire" href="" coords="1049,214,1331,517" shape="rect" data-text="Claire">
+    <area target="" alt="Sabrina" title="Sabrina" href="" coords="1526,215,1790,515" shape="rect" data-text="Sabrina">
+    <area target="" alt="Justin" title="Justin" href="" coords="69,668,389,970" shape="rect" data-text="Justin">
+    <area target="" alt="Megan" title="Megan" href="" coords="566,666,847,968" shape="rect" data-text="Megan">
+    <area target="" alt="Jane" title="Jane" href="" coords="1056,668,1331,965" shape="rect" data-text="Jane">
+    <area target="" alt="Matt" title="Matt" href="" coords="1526,666,1819,966" shape="rect" data-text="Matt">
+</map>
+
+<!-- Popup box -->
+<div id="popup" style="
+  position:absolute;
+  background:black;
+  color:white;
+  padding:6px 10px;
+  border-radius:6px;
+  white-space:nowrap;
+  pointer-events:none;
+  display:none;
+  z-index:10;">
+</div>  
+    </main>
+    <script>
+     const popup = document.getElementById("popup");
+const areas = document.querySelectorAll("area");
+
+areas.forEach(area => {
+  area.addEventListener("mouseover", (e) => {
+    popup.innerText = area.dataset.text;
+    popup.style.display = "block";
+  });
+
+  area.addEventListener("mousemove", (e) => {
+    popup.style.left = e.pageX + 10 + "px";
+    popup.style.top = e.pageY + 10 + "px";
+  });
+
+  area.addEventListener("mouseout", () => {
+    popup.style.display = "none";
+  });
+});   
+    </script>
+  </body>
+</html>
