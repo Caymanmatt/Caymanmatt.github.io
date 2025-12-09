@@ -46,6 +46,7 @@
 
     </main>
 
+
 <script>
 function scaleImageMap() {
   const img = document.getElementById("myImage");
@@ -75,30 +76,79 @@ window.addEventListener("load", () => {
 window.addEventListener("resize", scaleImageMap);
 
 
-// Popup logic with \n → <br> conversion
 const popup = document.getElementById("popup");
 const areas = document.querySelectorAll("area");
+let activeArea = null;
 
+// DESKTOP HOVER + MOBILE TAP HANDLER
 areas.forEach(area => {
 
-area.addEventListener("mouseover", () => {
-   popup.innerHTML = area.dataset.text.replace(/\\n/g, "<br>");
-  popup.style.display = "block";
-});
+  // Desktop hover
+  area.addEventListener("mouseover", (e) => {
+    if (window.matchMedia("(hover:hover)").matches) {
+      showPopup(area, e.pageX, e.pageY);
+    }
+  });
 
   area.addEventListener("mousemove", (e) => {
-    popup.style.left = e.pageX + 10 + "px";
-    popup.style.top = e.pageY + 10 + "px";
+    if (window.matchMedia("(hover:hover)").matches) {
+      movePopup(e.pageX, e.pageY);
+    }
   });
 
   area.addEventListener("mouseout", () => {
-    popup.style.display = "none";
+    if (window.matchMedia("(hover:hover)").matches) {
+      hidePopup();
+    }
   });
 
+  // Mobile tap
+  area.addEventListener("click", (e) => {
+    e.preventDefault(); // prevents clicking the empty href
+    if (activeArea === area) {
+      hidePopup();
+      activeArea = null;
+    } else {
+      activeArea = area;
+      const touchX = e.pageX || (e.touches ? e.touches[0].pageX : 0);
+      const touchY = e.pageY || (e.touches ? e.touches[0].pageY : 0);
+      showPopup(area, touchX, touchY);
+    }
+  });
 });
+
+// Tap anywhere else to close popup
+document.addEventListener("click", (e) => {
+  if (!popup.contains(e.target)) {
+    hidePopup();
+    activeArea = null;
+  }
+}, true);
+
+
+// Helper functions
+
+function showPopup(area, x, y) {
+  const text = area.dataset.text.replace(/\\n/g, "<br>");
+  popup.innerHTML = text;
+  popup.style.display = "block";
+  popup.style.left = (x + 10) + "px";
+  popup.style.top = (y + 10) + "px";
+}
+
+function movePopup(x, y) {
+  popup.style.left = (x + 10) + "px";
+  popup.style.top = (y + 10) + "px";
+}
+
+function hidePopup() {
+  popup.style.display = "none";
+}
+
 </script>
 
   </body>
 </html>
+
 
 
